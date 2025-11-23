@@ -1,0 +1,107 @@
+Credit folie
+Stimmen voiceover 
+Manim 2d blender 3d
+High polish
+
+Render senden, dann drüber sprechen script
+Steckbrief 
+
+Thumbnail 
+Opening, Vincent rubenetti 
+
+Earth zoom in mit vr.fragments
+Auf Mitochondrien fließender Übergang zu 1. (Kepler Recycling)
+Aus Sicht eines Aliens erklärt, für andere Aliens, aus der Umlaufbahn zu uns zoomen
+Kerbals?
+
+1
+Überblick wo man sich befindet Themenbezug, Einordnung 
+3. Schritt des Energiestoffwechsel
+
+2
+Beschrieben, Aufbau Mitochondrien  
+
+3
+Nadh+h+ Ablauf 
+
+4
+Fadh2 Ablauf 
+
+5
+ATP synthase, Synthese, 
+
+Ending 
+Zoom out mit zoom auf die Teile für Credits, earth und Zoom Out zu Alien mit "bye" sound, zurück ins Raumschiff und fliegen zu anderen stern.
+
+Einordnung-der-Endoxidation-kn-den-Energiestoffwechsel
+Nährstoffe, die wir über die Nahrung aufnehmen, werden im Energiestoffwechsel zur Synthese von ATP genutzt. Dieser Vorgang besteht aus drei Unterprozessen. Der Glykolyse, wo Glucose abgebaut wird, dem Citratzyklus, wo NADH+H+ und FADH2 gebildet werden und der Endoxidation bzw. Atmungskette, wo schlussendlich am meisten ATP gebildet wird. Betrachtet man den Ablauf für ein Glucosemolekül, gehen aus der Glykolyse zwei Moleküle NADH+H+ 2 ATP sowie 2 Pyruvat hervor. Aus den 2 Pyruvat wird in der oxidativen Decarboxylierung weitere 2 NADH+H+ gewonnen. Der Citratzyklus liefert weitere 6 Moleküle NADH+H+ sowie 2 Moleküle FADH2 und 2 ATP. Somit sind die Ausgangsstoffe für die Endoxidation 10 Moleküle NADH+H+ und 2 Moleküle FADH2. Außerdem wurden schon 4 Moleküle ATP gebildet. Davon werden 2 beim Transport von NADH+H+ und FADH2 in das Mitochondrium verbraucht. 
+
+https://www.ncbi.nlm.nih.gov/books/NBK526105/
+
+Scenes:
+Thumbnail 
+Opening 
+Einordnung
+Aufbau erklären mit gradienten
+Komplex1Reaktion
+Komplex1Explanation
+Komplex2Reaktion
+Komplex2Explanation
+Komplex3Explanation
+Komplex4Explanation
+Komplex5Explanation
+Ending 
+
+Komplex1Reaktion:
+NAD, das steht für Nicotinamid-Adenin-Dinukleotid.
+NAD⁺ reagiert mit zwei Wasserstoffatomen und zwei Elektronen zu NADH und H⁺.
+Das ist die Strukturformel von NAD⁺. Wir wollen nun von NAD⁺ zu NADH kommen.
+Zunächst wird ein Elektron genutzt, um ein Stickstoffatom im Ring zu neutralisieren. Ein zweites Elektron und ein Wasserstoffatom werden anschließend angebunden. Dadurch entsteht NADH.
+Es gilt also: NAD⁺ + 2H + 2e⁻ → H⁺ + NADH.
+
+Komplex1Explanation:
+Komplex 1 benötigt NADH sowie Protonen, die an der passenden Stelle des Komplexproteins binden. Das Molekül Q dient als Träger für Elektronen und Protonen.
+Ist Q angedockt, reagiert NADH zu NAD⁺. Ein Proton sowie ein weiterer Wasserstoff aus NADH bewirken, dass Q zu QH₂ wird. Dabei werden zwei Elektronen von NADH auf Q übertragen. So kann QH₂ durch die Membran zum nächsten Komplex wandern.
+NAD⁺ fließt zurück in die Matrix, um erneut zu NADH reduziert zu werden.
+Die beim Elektronentransfer frei werdende Energie reicht aus, um vier Protonen aus der Matrix in den Intermembranraum zu pumpen.
+Damit trägt Komplex 1 zum Aufbau des Protonengradienten bei.
+
+Komplex2Reaktion:
+FAD, das steht für Flavin-Adenin-Dinukleotid.
+FAD reagiert mit zwei Wasserstoffatomen und zwei Elektronen zu FADH₂.
+Das ist die Strukturformel von FAD.
+Ein Elektron und ein Wasserstoffatom werden an ein Stickstoffatom gebunden. Auf der gegenüberliegenden Seite passiert das Gleiche. Somit wird aus FAD FADH₂.
+Es gilt: FAD + 2H + 2e⁻ → FADH₂.
+
+Komplex2Explanation:
+FADH₂ wird benötigt, damit Komplex 2 funktioniert. Es bindet an der passenden Stelle des Komplexes, ebenso wie ein Q-Molekül innerhalb der Membran.
+Wenn FADH₂ zu FAD oxidiert wird, überträgt es seine beiden Wasserstoffatome auf Q, wodurch QH₂ entsteht. FADH₂ überträgt zwei Elektronen und QH₂ trägt diese weiter.
+QH₂ wandert zum nächsten Komplex, während FAD in die Matrix zurückkehrt, um wieder zu FADH₂ reduziert zu werden.
+Bei diesem Vorgang wird jedoch nicht genug Energie frei, um Protonen zu pumpen. Sie bleiben in der Matrix. Außerdem besitzt Komplex 2 keinen Kanal, welcher durch die Membran verläuft, und ist daher auch nicht fähig Protonen zu pumpen.
+
+Komplex3Explanation:
+Komplex 3 führt den sogenannten Q-Zyklus durch.
+Hier treffen die QH₂-Moleküle aus Komplex 1 und 2 ein. Auf der gegenüberliegenden Seite dockt Cytochrom C an. Cytochrom C ist ebenfalls ein Trägermolekül wie Q.
+Zunächst spaltet QH₂ seine H₂-Gruppe in zwei Protonen und zwei Elektronen.
+Ein Elektron wird an Cytochrom C übertragen, das damit zum nächsten Komplex weiterwandert. Die beiden Protonen werden in den Intermembranraum abgegeben.
+Nun gelangt ein anderes Q an einer anderen Stelle in den Komplex und erhält ein Elektron vom verbliebenen Q. Dieses Q erfüllt damit seine Aufgabe und wandert zurück durch die Membran.
+Der Zyklus beginnt nun die zweite Hälfte:
+Ein weiteres QH₂ spaltet sich auf und gibt erneut ein Elektron an Cytochrom C ab, das zum nächsten Komplex weitertransportiert wird. Die Protonen werden wieder in den Intermembranraum abgegeben. Das letzte Elektron wird auf Q⁻ übertragen. Q verlässt nun den Komplex.
+Q²⁻ kann aus der Matrix zwei Protonen aufnehmen und mithilfe seiner Elektronen zwei H-Atome bilden. Daraus entsteht wieder QH₂, das den Komplex verlässt.
+Der Q-Zyklus ist damit abgeschlossen und hat zur Verstärkung des Protonengradienten beigetragen.
+
+Komplex4Explanation:
+Komplex 4 verwendet den Sauerstoff, den wir atmen. O₂ bindet an der entsprechenden Stelle des Komplexproteins.
+Vier Cytochrom-C-Moleküle aus Komplex 3 liefern die Elektronen.
+Zunächst wird O₂ in zwei einzelne O-Atome aufgeteilt. Das erste O-Atom nimmt zwei Elektronen von Cytochrom C auf und wird zu O²⁻.
+Mit Hilfe von Protonen aus der Matrix wird daraus Wasser gebildet: 2H⁺ + 2e⁻ → 2H, O + 2H → H₂O Das entstandene Wasser gelangt in die Matrix. Dieser Vorgang passiert auch für das andere Sauerstoffatom. 
+Parallel dazu wird genügend Energie frei, um vier Protonen aus der Matrix in den Intermembranraum zu pumpen, was den Protonengradienten weiter verstärkt.
+
+Komplex5Explanation:
+Komplex 5, die ATP-Synthase, nutzt den aufgebauten Protonengradienten, um ATP zu erzeugen.
+ADP und P gelangen in das katalytische Zentrum.
+Die Protonen strömen durch den Protonenkanal zurück in die Matrix. Ihre kinetische Energie treibt die Motor-Untereinheit an.
+Jedes Proton dreht diese um 1/8 einer Umdrehung. Wenn eine Dritteldrehung erreicht ist, steht genügend Energie zur Verfügung, damit ADP und P zu ATP reagieren können.
+Das ATP wird freigesetzt und aus dem Mitochondrium exportiert. Der Vorgang wiederholt sich kontinuierlich.
+Nach jeweils drei ATP ist ein kompletter Durchlauf beendet.
+Damit stellt Komplex 5 den letzten Schritt der oxidativen Phosphorylierung dar.

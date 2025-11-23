@@ -493,8 +493,8 @@ class Komplex1Reaktion(Scene):
         self.play(ReplacementTransform(nadText[1], nadFullText[11:17]))
         self.play(nadText[2].animate.set_color(YELLOW))
         self.play(ReplacementTransform(nadText[2], nadFullText[17:]))
-        self.wait(3)
-        self.play(Unwrite(nadText), Unwrite(nadFullText), Unwrite(nadFullTextCopy))
+        self.wait(0.5)
+        self.play(Unwrite(nadText), Unwrite(nadFullText), Unwrite(nadFullTextCopy), run_time=1)
         self.remove(nadFullTextCopy)
         self.wait()
 
@@ -516,14 +516,14 @@ class Komplex1Reaktion(Scene):
         esecond = MathTex(r"e^{-}").shift(LEFT*1 - UP)
 
         self.wait()
-        self.play(Write(reaction[0]), run_time=3)
+        self.play(Write(reaction[0]), run_time=5)
         self.play(Write(reaction[1]))
         self.play(Write(reaction[2]), run_time=2)
         self.wait()
         self.play(reaction.animate.shift(UP*3))
         self.wait(2)
         self.play(Write(nadp), run_time=4)
-        self.wait(2)
+        self.wait(4)
         self.play(Write(efirst))
         self.play(Circumscribe(efirst))
         self.play(Indicate(efirst))
@@ -550,7 +550,7 @@ class Komplex1Reaktion(Scene):
         self.play(FadeIn(reaction_equal))
         self.wait()
         self.play(FadeIn(reaction_hp))
-        self.wait(5)
+        self.wait(4)
         self.play(FadeOut(nadp2),FadeOut(reaction_2h),FadeOut(reaction_2e),FadeOut(reaction_equal),FadeOut(reaction_hp),FadeOut(reaction),FadeOut(nadh), run_time = 2)
         self.wait()
 
@@ -561,14 +561,14 @@ class Komplex1Reaktion(Scene):
 class Komplex1Explanation(Scene):
     def construct(self):
 
-        protonPump = ImageMobject("Sprites/ProtonPumpSprite.png").shift(UP*3).scale(4)
+        protonPump = ImageMobject("Sprites/ProtonPumpSprite.png").shift(UP*2).scale(2)
 
-        nadhText = MathTex("NADH").shift(UP*-2 + 3*LEFT)
-        nadh = NADH().scale(0.4).shift(UP*-2 + 5.6*LEFT)
+        nadhText = MathTex("NADH").shift(UP*-2.7 + 3*LEFT).set_z_index(1)
+        nadh = NADH().scale(0.4).shift(UP*-2.7 + 5.6*LEFT).set_z_index(1)
         nadplusText = MathTex("NAD^{+}")
         nadplus = NADplus().scale(0.4)
 
-        hText = MathTex("H^{+}").shift(UP*-2 + 3*RIGHT)
+        hText = MathTex("H^{+}").shift(UP*-2 + 2*RIGHT).set_z_index(1)
 
         h1 = MathTex("H^{+}").shift(RIGHT*5 + DOWN*0)
         h2 = MathTex("H^{+}").shift(RIGHT*4 + DOWN*1)
@@ -580,48 +580,59 @@ class Komplex1Explanation(Scene):
         empty4 = Text("0").shift(RIGHT*1.4 + UP*9.03).set_opacity(0)
         allH = VGroup(h1, h2, h3, h4, empty1, empty2, empty3, empty4).shift(UP*-1 +RIGHT)
 
-        qText = MathTex("Q").shift(UP*2 + LEFT*8)
-        qh2Text = MathTex(r"QH_{2}").shift(UP*2 + LEFT*8)
-        e1 = Electron().scale(0.1).set_opacity(0)
-        e2 = Electron().scale(0.1).set_opacity(0)
+        qText = MathTex("Q").shift(UP*2 + LEFT*8).set_z_index(1)
+        qh2Text = MathTex(r"QH_{2}").shift(UP*2 + LEFT*8).set_z_index(1)
+        e1 = Electron().scale(0.1).set_opacity(0).set_z_index(1)
+        e2 = Electron().scale(0.1).set_opacity(0).set_z_index(1)
 
-        membrane1 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.4).shift(UP*2 +LEFT*4)
-        membrane2 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.8).shift(UP*2 +LEFT*-4)
-        complex1 = Group(membrane1, membrane2, protonPump)
+        membrane1 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.4).shift(UP*2 +LEFT*4)
+        membrane2 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.8).shift(UP*2 +LEFT*-4)
+        membrane3 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.4).shift(UP*2 +LEFT*-0)
+        complex1 = Group(membrane1, membrane2, membrane3, protonPump)
+
+        blackBox1 = SurroundingRectangle(nadhText, corner_radius=0.3, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(nadhText)
+        blackBox2 = SurroundingRectangle(qText, corner_radius=0.3, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(qText)
 
         self.wait()
         self.play(Write(nadhText), Write(nadh), Write(hText))
         self.wait()
         self.play(FadeIn(complex1))
         self.wait()
-        self.play(nadhText.animate.shift(2.5*UP + 1.5*RIGHT), nadh.animate.shift(2.5*UP + 1.5*RIGHT), hText.animate.shift(LEFT*3 +2.5*UP), run_time=2)
-        self.play(qText.animate.shift(RIGHT*5.7), run_time = 3)
+        self.play(nadhText.animate.shift(2.7*UP), blackBox1.animate.shift(2.7*UP), nadh.animate.shift(2.7*UP), hText.animate.shift(LEFT*3 +2*UP), run_time=2)
+        self.play(qText.animate.shift(RIGHT*5.7), blackBox2.animate.shift(RIGHT*5.7), run_time = 3)
 
-        self.wait()
+        self.wait(3)
         nadplusText.move_to(nadhText)
         nadplus.move_to(nadh)
-        self.play(Transform(nadh, nadplus), Transform(nadhText, nadplusText), FadeOut(hText), run_time = 2.5)
+        self.play(Transform(nadh, nadplus), Transform(nadhText, nadplusText), run_time=2) 
+        self.play(Circumscribe(hText))
+        self.wait()
+        self.play(hText.animate.shift(LEFT+UP).set_opacity(0), run_time = 2.5)
 
         self.wait(2)
-        e1.move_to([-1.5,0.5,0])
-        e2.move_to([-1.5,0.5,0])
+        e1.move_to([-3,0.5,0])
+        e2.move_to([-3,0.5,0])
         qh2Text.move_to(qText)
-        self.play(e1.animate.set_opacity(1).shift(UP*2 + LEFT*1), e2.animate.set_opacity(1).shift(UP*2 + LEFT*0.6),run_time=2)
-        self.play(TransformMatchingShapes(qText,qh2Text))
+        blackBox3 = SurroundingRectangle(qh2Text, corner_radius=0.3, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(qh2Text)
+
+        self.play(TransformMatchingShapes(qText,qh2Text), ReplacementTransform(blackBox2,blackBox3))
         self.wait()
-        self.play(VGroup(qh2Text,e1,e2).animate.shift(LEFT*7), run_time=2)
-        nadh.suspend_updating()
-        self.play(nadh.animate.shift(DOWN*4 + LEFT).set_opacity(0), nadhText.animate.shift(DOWN*4 + LEFT).set_opacity(0), run_time=1.5)
+        self.play(e1.animate.set_opacity(1).shift(UP*2 + LEFT*-0.5), e2.animate.set_opacity(1).shift(UP*2 + LEFT*-0.9),run_time=4)
+        self.wait()
+        self.play(VGroup(qh2Text,e1,e2,blackBox3).animate.shift(LEFT*7), run_time=2)
+        self.wait(2)
+        self.play(VGroup(nadhText,nadh,blackBox1).animate.shift(DOWN*4 + RIGHT*2).set_opacity(0), run_time=3)
         self.wait()
 
         ## pump h+
         self.play(Write(allH))
+        self.wait()
         self.play(allH.animate.shift(UP*1 -RIGHT))
         self.wait(2)
         self.play(CyclicReplace(*allH, path_arc=-1.4), run_time=3)
         self.play(CyclicReplace(*allH, path_arc=-1.4), run_time=2.5)
-        self.play(CyclicReplace(*allH, path_arc=-1.4), run_time=1.5)
-        self.play(CyclicReplace(*allH, path_arc=-1.4), run_time=1)
+        self.play(CyclicReplace(*allH, path_arc=-1.4), run_time=2)
+        self.play(CyclicReplace(*allH, path_arc=-1.4), run_time=2)
         self.play(FadeOut(complex1))
         self.wait()
 
@@ -649,8 +660,8 @@ class Komplex2Reaktion(Scene):
         self.play(ReplacementTransform(fadText[1], fadFullText[6:12]))
         self.play(fadText[2].animate.set_color(YELLOW))
         self.play(ReplacementTransform(fadText[2], fadFullText[12:]))
-        self.wait(3)
-        self.play(Unwrite(fadText), Unwrite(fadFullText), Unwrite(fadFullTextCopy))
+        self.wait(0.5)
+        self.play(Unwrite(fadText), Unwrite(fadFullText), Unwrite(fadFullTextCopy), run_time=1)
         self.remove(fadFullTextCopy)
         self.wait()
 
@@ -671,34 +682,23 @@ class Komplex2Reaktion(Scene):
         hsecond = MathTex(r"H").shift(RIGHT*2.2 + DOWN *2.4)
 
         self.wait()
-        self.play(Write(reaction[0]), run_time = 3)
+        self.play(Write(reaction[0]), run_time = 4.5)
         self.play(Write(reaction[1]), run_time = 1)
         self.play(Write(reaction[2]), run_time = 2)
         self.wait()
         self.play(reaction.animate.shift(UP*3))
         self.wait(2)
-        self.play(Write(fad), run_time = 6)
+        self.play(Write(fad), run_time = 3)
         self.wait()
         self.play(Write(efirst))
+        self.play(Indicate(efirst), run_time=1)
         self.play(Write(hfirst))
+        self.play(Indicate(hfirst), run_time=1)
         self.wait()
-        self.play(Circumscribe(efirst))
-        self.play(Indicate(efirst))
-        self.wait()
-        self.play(Circumscribe(hfirst))
-        self.play(Indicate(hfirst))
-        self.wait()
-        self.play(efirst.animate.shift(RIGHT*0.8 + DOWN).set_opacity(0), hfirst.animate.shift(RIGHT*-0.8 + DOWN*0.5), run_time = 2)
+        self.play(efirst.animate.shift(RIGHT*0.8 + DOWN).set_opacity(0), hfirst.animate.shift(RIGHT*-0.8 + DOWN*0.5), run_time = 1.5)
         self.wait()
         self.play(Write(esecond))
         self.play(Write(hsecond))
-        self.wait()
-        self.play(Circumscribe(esecond))
-        self.play(Indicate(esecond))
-        self.wait()
-        self.play(Circumscribe(hsecond))
-        self.play(Indicate(hsecond))
-        self.wait()
         self.play(esecond.animate.shift(RIGHT*0.6 + UP*1).set_opacity(0), hsecond.animate.shift(RIGHT*-0.5 + DOWN*-0.4), run_time = 2)
         self.wait()
         self.play(FadeOut(hfirst), FadeOut(hsecond), TransformMatchingShapes(fad, fadh2))
@@ -720,21 +720,26 @@ class Komplex2Reaktion(Scene):
 class Komplex2Explanation(Scene):
     def construct(self):
 
-        dehydronator = ImageMobject("Sprites/DehydronatorSprite.png").shift(UP*2).scale(4)
+        dehydronator = ImageMobject("Sprites/DehydronatorSprite.png").shift(UP*0).scale(1.6)
 
-        fadh2Text = MathTex("FADH_{2}").shift(UP*-2 + 1*LEFT)
-        fadh2 = FADH2().scale(0.4).shift(3.3*LEFT +1.9*DOWN)
-        fadText = MathTex("FAD")
-        fad = FAD().scale(0.4)
+        fadh2Text = MathTex("FADH_{2}").shift(UP*-2 + 2*LEFT).set_z_index(1)
+        fadh2 = FADH2().scale(0.4).shift(4.3*LEFT +1.9*DOWN).set_z_index(1)
+        fadText = MathTex("FAD").set_z_index(1)
+        fad = FAD().scale(0.4).set_z_index(1)
 
-        qText = MathTex("Q").shift(UP*1 + LEFT*8)
-        qh2Text = MathTex(r"QH_{2}").shift(UP*1 + LEFT*8)
-        e1 = Electron().scale(0.1).set_opacity(0)
-        e2 = Electron().scale(0.1).set_opacity(0)
+        qText = MathTex("Q").shift(UP*1 + LEFT*8).set_z_index(1)
+        qh2Text = MathTex(r"QH_{2}").shift(UP*1 + LEFT*8).set_z_index(1)
+        e1 = Electron().scale(0.1).set_opacity(0).set_z_index(1)
+        e2 = Electron().scale(0.1).set_opacity(0).set_z_index(1)
 
-        membrane1 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.4).shift(UP*1 +LEFT*4)
-        membrane2 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.8).shift(UP*1 +LEFT*-4)
-        complex2 = Group(membrane1, membrane2, dehydronator)
+        membrane1 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.4).shift(UP*1 +LEFT*3)
+        membrane2 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.8).shift(UP*1 +LEFT*-2.8)
+        membrane3 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.8).shift(UP*1 +LEFT*-8.6)
+        membrane4 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.4).shift(UP*1 +LEFT*8.8)
+        complex2 = Group(membrane1, membrane2, membrane3, membrane4, dehydronator)
+
+        blackBox1 = SurroundingRectangle(fadh2Text, corner_radius=0.3, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(fadh2Text)
+        blackBox2 = SurroundingRectangle(qText, corner_radius=0.3, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(qText)
 
 
         self.wait()
@@ -742,8 +747,8 @@ class Komplex2Explanation(Scene):
         self.wait()
         self.play(FadeIn(complex2))
         self.wait()
-        self.play(fadh2Text.animate.shift(1*UP + 1*RIGHT), fadh2.animate.shift(1*UP + 1*RIGHT), run_time=2)
-        self.play(qText.animate.shift(RIGHT*5.7), run_time = 3)
+        self.play(VGroup(fadh2Text,fadh2,blackBox1).animate.shift(1.3*UP + 2*RIGHT), run_time=2)
+        self.play(VGroup(qText,blackBox2).animate.shift(RIGHT*7.7), run_time = 3)
 
         self.wait()
         fadText.move_to(fadh2Text)
@@ -751,15 +756,18 @@ class Komplex2Explanation(Scene):
         self.play(Transform(fadh2, fad), Transform(fadh2Text, fadText), run_time = 2.5)
 
         self.wait(2)
-        e1.move_to([-2,-1,0])
-        e2.move_to([-2,-1,0])
         qh2Text.move_to(qText)
-        self.play(e1.animate.set_opacity(1).shift(UP*2.4 + LEFT*0.5), e2.animate.set_opacity(1).shift(UP*2.4 + LEFT*0.1),run_time=2)
-        self.play(TransformMatchingShapes(qText,qh2Text))
+        blackBox3 = SurroundingRectangle(qh2Text, corner_radius=0.3, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(qh2Text)
+        self.play(TransformMatchingShapes(qText,qh2Text), ReplacementTransform(blackBox2,blackBox3), run_time=2)
+
+        e1.move_to([0,-0.5,0])
+        e2.move_to([0,-0.5,0])
+        self.play(e1.animate.set_opacity(1).shift(UP*1.9 + LEFT*0.5), e2.animate.set_opacity(1).shift(UP*1.9 + LEFT*0.1),run_time=5)
         self.wait()
 
-        self.play(VGroup(qh2Text,e1,e2).animate.shift(LEFT*7), run_time=2)
-        self.play(fadh2.animate.shift(DOWN*4 + LEFT).set_opacity(0), fadh2Text.animate.shift(DOWN*4 + LEFT).set_opacity(0), run_time=1.5)
+        self.play(VGroup(qh2Text,e1,e2,blackBox3).animate.shift(LEFT*8), run_time=3)
+        self.wait()
+        self.play(VGroup(fadh2,fadh2Text,blackBox1).animate.shift(DOWN*4 + RIGHT*2).set_opacity(0), run_time=3)
         self.wait()
 
 
@@ -830,7 +838,7 @@ class Komplex2Explanation(Scene):
         self.play(FadeIn(allH), t.animate.set_value(1), rate_func=linear, run_time = 2)
         self.play(t.animate.set_value(6), rate_func=linear, run_time = 10)
         self.play(FadeOut(allH), t.animate.set_value(7), rate_func=linear, run_time = 2)
-        self.play(FadeOut(complex2))
+        self.play(FadeOut(complex2), run_time=2)
         self.wait()
 
 
@@ -863,34 +871,36 @@ class Komplex3Explanation(Scene):
         cytc1Text = MathTex("CytC").shift(UP*0.5 + RIGHT*8)
         cytc2Text = MathTex("CytC").shift(UP*0.5 + RIGHT*8)
 
-        qCycleHub = ImageMobject("Sprites/QCycleHubSprite.png").shift(UP*0.4).scale(4)
-        wipHub = Rectangle(width=2.7, height=6 ,color=PINK, fill_opacity=1).shift(UP*0.4)
-        membrane1 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.3).shift(UP*0 +LEFT*8.4).scale(2.5)
-        membrane2 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.3).shift(UP*0 +LEFT*-8.4).scale(2.5)
-        complex3 = Group(membrane1, membrane2, wipHub)
+        qCycleHub = ImageMobject("Sprites/QCycleHubSprite.png").shift(UP*0).scale(2.7)
+        membrane1 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.3).shift(UP*0 +LEFT*8.4).scale(2.5)
+        membrane2 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.3).shift(UP*0 +LEFT*-8.4).scale(2.5)
+        complex3 = Group(membrane1, membrane2, qCycleHub)
 
         self.wait()
         self.play(FadeIn(complex3))
-        self.wait()
-        self.play(qh2Text1.animate.shift(RIGHT*6), run_time=2)
-        self.play(cytc1Text.animate.shift(RIGHT*-6), run_time=2)
-        self.play(wipHub.animate.set_opacity(0.2))
+        self.wait(2)
+        self.play(qh2Text1.animate.shift(RIGHT*6), run_time=3)
+        self.wait(4)
+        self.play(cytc1Text.animate.shift(RIGHT*-6), run_time=4)
+        self.play(qCycleHub.animate.set_opacity(0.3).set_z_index(-1))
         e1.next_to(qh2Text1, UP).shift(LEFT*0.2)
         e2.next_to(qh2Text1, UP).shift(LEFT*-0.2)
         qText1.move_to(qh2Text1)
+        self.wait(4)
         self.play(ReplacementTransform(qh2Text1, VGroup(qText1,e1,e2,h1,h2)), run_time=2)
-        self.wait(2)
+        self.wait(5)
         self.play(e1.animate.next_to(cytc1Text, UP), run_time=2)
         self.wait()
         self.play(cytc1Text.animate.shift(RIGHT*6), e1.animate.shift(RIGHT*6), run_time=2)
-        self.wait()
+        self.wait(3)
         self.play(AnimationGroup(h1.animate.shift(UP*5 + RIGHT*2), h2.animate.shift(UP*5 + LEFT), lag_ratio=0.2), run_time=3)
+        self.wait()
         self.play(qText2.animate.shift(RIGHT*8), run_time=3)
         self.wait()
-        self.play(e2.animate.next_to(qText2, UP))
+        self.play(e2.animate.next_to(qText2, UP), run_time=3)
         self.wait()
-        self.play(qText1.animate.shift(LEFT*6), run_time=2)
-        self.wait()
+        self.play(qText1.animate.shift(LEFT*6), run_time=5)
+        self.wait(2)
 
         self.play(qh2Text2.animate.shift(RIGHT*6), run_time=2)
         self.play(cytc2Text.animate.shift(RIGHT*-6), run_time=2)
@@ -905,9 +915,9 @@ class Komplex3Explanation(Scene):
         self.wait()
         self.play(AnimationGroup(h3.animate.shift(UP*5 + RIGHT*2), h4.animate.shift(UP*5 + LEFT), lag_ratio=0.2), run_time=3)
         self.wait()
-        self.play(e4.animate.next_to(qText2, UP).shift(RIGHT*0.3))
+        self.play(e4.animate.next_to(qText2, UP).shift(RIGHT*0.3), run_time=2)
         self.wait()
-        self.play(qText3.animate.shift(LEFT*6), run_time=2)
+        self.play(qText3.animate.shift(LEFT*6), run_time=3)
         self.wait()
 
         self.play(Write(h5))
@@ -923,9 +933,9 @@ class Komplex3Explanation(Scene):
         qh2Text3.move_to(qText2)
         self.play(ReplacementTransform(VGroup(qText2,h7,h8), qh2Text3), run_time=2.5)
         self.wait(2)
-        self.play(qh2Text3.animate.shift(LEFT*8), wipHub.animate.set_opacity(1), run_time=3)
+        self.play(qh2Text3.animate.shift(LEFT*8), run_time=5)
         self.wait()
-        self.play(FadeOut(complex3))
+        self.play(FadeOut(complex3), run_time=2)
         self.wait()
 
 
@@ -935,17 +945,20 @@ class Komplex3Explanation(Scene):
 class Komplex4Explanation(Scene):
     def construct(self):
 
-        o2Text = MathTex(r"O_{2}").shift(UP*-2 + 2*RIGHT)
-        ofirst = MathTex(r"O")
-        osecond = MathTex(r"O")
-        h2o1Text = MathTex(r"H_{2}O")
-        h2o2Text = MathTex(r"H_{2}O")
+        o2Text = MathTex(r"O_{2}").shift(UP*-2 + -1*RIGHT).set_z_index(1)
+        ofirst = MathTex(r"O").set_z_index(1)
+        osecond = MathTex(r"O").set_z_index(1)
+        h2o1Text = MathTex(r"H_{2}O").set_z_index(1)
+        h2o2Text = MathTex(r"H_{2}O").set_z_index(1)
 
-        h1 = MathTex("H^{+}").shift(UP*-3 + -3*RIGHT)
-        h2 = MathTex("H^{+}").shift(UP*-2 + -3.5*RIGHT)
-        h3 = MathTex("H^{+}").shift(UP*-3 + -4*RIGHT)
-        h4 = MathTex("H^{+}").shift(UP*-2 + -4.5*RIGHT)
-        hReaction = VGroup(h1,h2,h3,h4)
+        blackBox1 = SurroundingRectangle(o2Text, corner_radius=0.3, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(o2Text)
+
+
+        h1 = MathTex("H^{+}").shift(UP*-3 + -3*RIGHT).set_z_index(1)
+        h2 = MathTex("H^{+}").shift(UP*-2 + -3.5*RIGHT).set_z_index(1)
+        h3 = MathTex("H^{+}").shift(UP*-3 + -4*RIGHT).set_z_index(1)
+        h4 = MathTex("H^{+}").shift(UP*-2 + -4.5*RIGHT).set_z_index(1)
+        hReaction = VGroup(h1,h2,h3,h4).set_z_index(1)
         h1normal = MathTex("H")
         h2normal = MathTex("H")
         h3normal = MathTex("H")
@@ -974,35 +987,37 @@ class Komplex4Explanation(Scene):
         taxi3 = VGroup(cytc3Text,e3)
         taxi4 = VGroup(cytc4Text,e4)
 
-        oxidator = ImageMobject("Sprites/OxidatorSprite.png").shift(UP*3+ RIGHT*3).scale(4)
-        membrane1 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.4).shift(UP*2 +LEFT*1)
-        membrane2 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.8).shift(UP*2 +LEFT*-7)
-        membrane3 = ImageMobject("Sprites/MembraneSprite.png").set_opacity(0.4).shift(UP*2 +LEFT*6.85)
+        oxidator = ImageMobject("Sprites/OxidatorSprite.png").shift(UP*1.3+ RIGHT*3).scale(2.3)
+        membrane1 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.4).shift(UP*2 +LEFT*1)
+        membrane2 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.8).shift(UP*2 +LEFT*-4.8)
+        membrane3 = ImageMobject("SpritesOld/MembraneSprite.png").set_opacity(0.4).shift(UP*2 +LEFT*6.85)
         complex4 = Group(membrane1, membrane2, membrane3, oxidator)
 
         self.wait()
         self.play(Write(o2Text), Write(hReaction))
         self.wait()
         self.play(FadeIn(complex4))
-        self.wait()
-        self.play(o2Text.animate.shift(1.5*UP + 2*LEFT), hReaction.animate.shift(RIGHT*1 +0*UP), run_time=2)
+        self.wait(3)
+        self.play(VGroup(o2Text,blackBox1).animate.shift(1.5*UP + 4*RIGHT), hReaction.animate.shift(RIGHT*4 +0*UP), run_time=2)
         self.play(AnimationGroup(
             taxi1.animate.shift(RIGHT*8.5),taxi2.animate.shift(RIGHT*8.5),
             taxi3.animate.shift(RIGHT*8.5),taxi4.animate.shift(RIGHT*8.5), lag_ratio=0.2), run_time = 6)
 
-        self.wait()
+        self.wait(2)
         ofirst.next_to(o2Text, LEFT)
         osecond.next_to(o2Text, RIGHT)
-        self.play(Transform(o2Text, VGroup(ofirst,osecond)), run_time = 2.5)
+        blackBox2 = SurroundingRectangle(ofirst, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).scale(1.3).move_to(ofirst)
+        blackBox3 = SurroundingRectangle(osecond, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).scale(1.3).move_to(osecond)
+        self.play(Transform(o2Text, VGroup(ofirst,osecond)), ReplacementTransform(blackBox1, VGroup(blackBox2,blackBox3)), run_time = 2.5)
 
-        self.wait(2)
-        self.play(e1.animate.move_to([-0.9,-0.2,0]))
+        self.wait(3)
+        self.play(e1.animate.move_to([2.1,-0.2,0]))
         self.play(CyclicReplace(*VGroup(taxi4,taxi3,taxi2,cytc1Text)))
-        self.play(e2.animate.move_to([-0.4,-0.2,0]))
+        self.play(e2.animate.move_to([2.6,-0.2,0]))
         self.play(CyclicReplace(*VGroup(cytc1Text,taxi4,taxi3,cytc2Text)))
-        self.wait()
-        self.play(h1.animate.move_to([-1.1,-1.1,0]))
-        self.play(h2.animate.move_to([-0.3,-1.1,0]))
+        self.wait(3)
+        self.play(h1.animate.move_to([1.9,-1.1,0]))
+        self.play(h2.animate.move_to([2.7,-1.1,0]))
         self.wait(2)
 
         h1normal.move_to(h1)
@@ -1010,23 +1025,25 @@ class Komplex4Explanation(Scene):
         self.play(e1.animate.move_to(h1).set_opacity(0), Transform(h1, h1normal))
         self.play(e2.animate.move_to(h2).set_opacity(0), Transform(h2, h2normal))
         h2o1Text.move_to(o2Text[0])
+        self.wait(2)
+        blackBox4 = SurroundingRectangle(h2o1Text, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).scale(1.3).move_to(h2o1Text)
+        self.play(Transform(VGroup(o2Text[0],h1,h2), h2o1Text), ReplacementTransform(blackBox2, blackBox4), run_time=2)
         self.wait()
-        self.play(Transform(VGroup(o2Text[0],h1,h2), h2o1Text), run_time=2)
 
-        self.play(o2Text[0].animate.shift(RIGHT*9+DOWN*3),
+        self.play(o2Text[0].animate.shift(LEFT*4+DOWN*4), blackBox4.animate.shift(LEFT*4+DOWN*4),
                 cytc1Text.animate.set_y(y=1.7), cytc2Text.animate.set_y(y=1.7), cytc3Text.animate.set_y(y=1.7), cytc4Text.animate.set_y(y=1.7),
                 e3.animate.set_y(y=2.1),e4.animate.set_y(y=2.1), run_time=3)
 
         self.play(hReaction.animate.shift(RIGHT*2))
 
         self.wait(2)
-        self.play(e3.animate.move_to([0.4,-0.2,0]))
+        self.play(e3.animate.move_to([3.4,-0.2,0]))
         self.play(CyclicReplace(*VGroup(cytc2Text,cytc1Text,taxi4,cytc3Text)))
-        self.play(e4.animate.move_to([1,-0.2,0]))
+        self.play(e4.animate.move_to([4,-0.2,0]))
         self.play(CyclicReplace(*VGroup(cytc3Text,cytc2Text,cytc1Text,cytc4Text)))
         self.wait()
-        self.play(h3.animate.move_to([0.2,-1.1,0]))
-        self.play(h4.animate.move_to([1.1,-1.1,0]))
+        self.play(h3.animate.move_to([3.2,-1.1,0]))
+        self.play(h4.animate.move_to([4.1,-1.1,0]))
         self.wait(2)
 
         h3normal.move_to(h3)
@@ -1034,23 +1051,172 @@ class Komplex4Explanation(Scene):
         self.play(e3.animate.move_to(h3).set_opacity(0), Transform(h3, h3normal))
         self.play(e4.animate.move_to(h4).set_opacity(0), Transform(h4, h4normal))
         h2o2Text.move_to(o2Text[1])
+        blackBox5 = SurroundingRectangle(h2o2Text, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).scale(1.3).move_to(h2o2Text)
         self.wait()
-        self.play(Transform(VGroup(o2Text[1],h3,h4), h2o2Text))
+        self.play(Transform(VGroup(o2Text[1],h3,h4), h2o2Text), ReplacementTransform(blackBox3, blackBox5))
 
-        self.play(o2Text[1].animate.shift(LEFT*2+DOWN*5),
+        self.play(o2Text[1].animate.shift(LEFT*3+DOWN*5), blackBox5.animate.shift(LEFT*3+DOWN*5),
                 cytc1Text.animate.set_y(y=1.7), cytc2Text.animate.set_y(y=1.7), cytc3Text.animate.set_y(y=1.7), cytc4Text.animate.set_y(y=1.7), run_time=2)
 
         self.play(AnimationGroup(
             cytc1Text.animate.shift(RIGHT*-8.5),cytc2Text.animate.shift(RIGHT*-8.5),
-            cytc3Text.animate.shift(RIGHT*-8.5),cytc4Text.animate.shift(RIGHT*-8.5), lag_ratio=0.2), run_time = 6)
+            cytc3Text.animate.shift(RIGHT*-8.5),cytc4Text.animate.shift(RIGHT*-8.5), lag_ratio=0.2), run_time = 3)
 
         ## pump h+
-        self.play(Write(allH), run_time=2)
+        self.play(Write(allH), run_time=1)
         self.play(allH.animate.shift(UP*1 +RIGHT))
-        self.wait(2)
         self.play(CyclicReplace(*allH, path_arc=1.4), run_time=3)
         self.play(CyclicReplace(*allH, path_arc=1.4), run_time=2.5)
         self.play(CyclicReplace(*allH, path_arc=1.4), run_time=1.5)
         self.play(CyclicReplace(*allH, path_arc=1.4), run_time=1)
         self.play(FadeOut(complex4))
         self.wait()
+
+
+
+
+
+class Komplex5Explanation(ThreeDScene):
+    def construct(self):
+        
+        atpSynthaseHead = ImageMobject("Sprites/ATPSynthaseHeadSprite.png").scale(2).set_z_index(1).shift(DOWN*0.5)
+        shaft1 = ImageMobject("Sprites/ATPSynthaseShaftSprite.png").scale(2).set_z_index(1).shift(UP*0.9)
+        shaft2 = ImageMobject("Sprites/ATPSynthaseShaftSprite.png").scale(2).set_z_index(1).shift(UP*0.9)
+        atpSynthaseConnector = ImageMobject("Sprites/ProtonChannelSprite.png").scale(2).shift(UP*1.5).set_z_index(0)
+
+        membrane1 = ImageMobject("SpritesOld/MembraneSprite.png").scale(1).shift(UP*1.5).set_z_index(-1).set_opacity(0.6)
+        membrane2 = ImageMobject("SpritesOld/MembraneSprite.png").scale(1).shift(UP*1.5 +RIGHT*5.8).set_z_index(-1).set_opacity(0.6)
+        membrane3 = ImageMobject("SpritesOld/MembraneSprite.png").scale(1).shift(UP*1.5 +RIGHT*-5.8).set_z_index(-1).set_opacity(0.6)
+
+        complex5 = Group(atpSynthaseHead, atpSynthaseConnector, shaft1, shaft2, membrane1, membrane2, membrane3)
+
+        h1 = MathTex(r"H^{+}").shift(UP*3 + RIGHT*8).set_z_index(2)
+        h2 = MathTex(r"H^{+}").shift(UP*3 + RIGHT*9).set_z_index(2)
+        h3 = MathTex(r"H^{+}").shift(UP*3 + RIGHT*10).set_z_index(2)
+        h4 = MathTex(r"H^{+}").shift(UP*3 + RIGHT*11).set_z_index(2)
+        h5 = MathTex(r"H^{+}").shift(UP*3 + RIGHT*12).set_z_index(2)
+        h6 = MathTex(r"H^{+}").shift(UP*3 + RIGHT*13).set_z_index(2)
+        h7 = MathTex(r"H^{+}").shift(UP*3 + RIGHT*14).set_z_index(2)
+        h8 = MathTex(r"H^{+}").shift(UP*3 + RIGHT*15).set_z_index(2)
+        allH = VGroup(h1,h2,h3,h4,h5,h6,h7,h8)
+
+        adp1 = MathTex("ADP").shift(LEFT*5 + DOWN).set_z_index(2)
+        adp2 = MathTex("ADP").shift(LEFT*5 + DOWN).set_z_index(2)
+        adp3 = MathTex("ADP").shift(LEFT*5 + DOWN).set_z_index(2)
+
+        atp1 = MathTex("ATP").set_z_index(2).shift(RIGHT + DOWN*1.5)
+        atp2 = MathTex("ATP").set_z_index(2).shift(RIGHT + DOWN*1.5)
+        atp3 = MathTex("ATP").set_z_index(2).shift(RIGHT + DOWN*1.5)
+
+        p1 = MathTex("P").shift(LEFT*5 + 2.5*DOWN).set_z_index(2)
+        p2 = MathTex("P").shift(LEFT*5 + 2.5*DOWN).set_z_index(2)
+        p3 = MathTex("P").shift(LEFT*5 + 2.5*DOWN).set_z_index(2)
+
+ 
+        self.play(FadeIn(complex5), run_time=0.1)
+        self.play(Write(adp1))
+        self.play(Write(p1))
+
+        blackBox1 = SurroundingRectangle(adp1, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(adp1).set_z_index(2)
+        blackBox2 = SurroundingRectangle(p1, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(p1).set_z_index(2)
+        self.play(VGroup(blackBox1, adp1).animate.shift(RIGHT*4.7 + DOWN*0.3))
+        self.play(VGroup(blackBox2, p1).animate.shift(RIGHT*4.7 + UP*0.5))
+        self.play(AnimationGroup(*[h.animate.shift(LEFT * 9) for h in allH], lag_ratio=0.1))
+
+        shearIn = [[0.707, 0], [0, 1]]
+        shearInFull = [[0.01, 0], [0, 1]]
+        shearOut = [[1.415, 0], [0, 1]]
+        shearOutFull = [[100, 0], [0, 1]]
+        shaft2.apply_matrix(shearIn)
+        shaft2.apply_matrix(shearInFull)
+
+        blackBox3 = SurroundingRectangle(h1, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(h1).set_z_index(2)
+        self.play(VGroup(blackBox3,h1).animate.shift(DOWN*1.5))
+        self.play(shaft1.animate.apply_matrix(shearIn), shaft2.animate.apply_matrix(shearOutFull), VGroup(blackBox3,h1).animate.shift(RIGHT*2.2))
+        self.play(VGroup(blackBox3,h1).animate.shift(DOWN*1.5))
+        self.play(VGroup(blackBox3,h1).animate.shift(RIGHT*7))
+        self.play(VGroup(h2,h3,h4,h5,h6,h7,h8).animate.shift(LEFT))
+
+        blackBox3 = SurroundingRectangle(h2, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(h2).set_z_index(2)
+        self.play(VGroup(blackBox3,h2).animate.shift(DOWN*1.5))
+        self.play(shaft1.animate.apply_matrix(shearInFull), shaft2.animate.apply_matrix(shearOut), VGroup(blackBox3,h2).animate.shift(RIGHT*2.2))
+        self.play(VGroup(blackBox3,h2).animate.shift(DOWN*1.5))
+        self.play(VGroup(blackBox3,h2).animate.shift(RIGHT*7))
+        self.play(VGroup(h3,h4,h5,h6,h7,h8).animate.shift(LEFT))
+
+        blackBox3 = SurroundingRectangle(h3, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(h3).set_z_index(2)
+        self.play(VGroup(blackBox3,h3).animate.shift(DOWN*1.5))
+        self.play(shaft1.animate.apply_matrix(shearOutFull), shaft2.animate.apply_matrix(shearIn), VGroup(blackBox3,h3).animate.shift(RIGHT*2.2))
+        self.play(VGroup(blackBox3,h3).animate.shift(DOWN*1.5))
+        self.play(VGroup(blackBox3,h3).animate.shift(RIGHT*7))
+        self.play(VGroup(h4,h5,h6,h7,h8).animate.shift(LEFT))
+
+
+        blackBox4 = SurroundingRectangle(atp1, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(atp1).set_z_index(2)
+        self.play(ReplacementTransform(VGroup(blackBox1,blackBox2), blackBox4), ReplacementTransform(VGroup(adp1,p1), atp1))
+        self.play(VGroup(blackBox4,atp1).animate.shift(DOWN*4 + RIGHT*2))
+
+        self.play(Write(adp2))
+        self.play(Write(p2))
+
+        blackBox1 = SurroundingRectangle(adp2, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(adp2).set_z_index(2)
+        blackBox2 = SurroundingRectangle(p2, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(p2).set_z_index(2)
+        self.play(VGroup(blackBox1, adp2).animate.shift(RIGHT*4.7 + DOWN*0.3))
+        self.play(VGroup(blackBox2, p2).animate.shift(RIGHT*4.7 + UP*0.5))
+
+
+        blackBox3 = SurroundingRectangle(h4, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(h4).set_z_index(2)
+        self.play(VGroup(blackBox3,h4).animate.shift(DOWN*1.5))
+        self.play(shaft1.animate.apply_matrix(shearOut), shaft2.animate.apply_matrix(shearInFull), VGroup(blackBox3,h4).animate.shift(RIGHT*2.2))
+        self.play(VGroup(blackBox3,h4).animate.shift(DOWN*1.5))
+        self.play(VGroup(blackBox3,h4).animate.shift(RIGHT*7))
+        self.play(VGroup(h5,h6,h7,h8).animate.shift(LEFT))
+
+
+        blackBox3 = SurroundingRectangle(h5, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(h5).set_z_index(2)
+        self.play(VGroup(blackBox3,h5).animate.shift(DOWN*1.5))
+        self.play(shaft1.animate.apply_matrix(shearIn), shaft2.animate.apply_matrix(shearOutFull), VGroup(blackBox3,h5).animate.shift(RIGHT*2.2))
+        self.play(VGroup(blackBox3,h5).animate.shift(DOWN*1.5))
+        self.play(VGroup(blackBox3,h5).animate.shift(RIGHT*7))
+        self.play(VGroup(h6,h7,h8).animate.shift(LEFT))
+
+
+        blackBox4 = SurroundingRectangle(atp2, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(atp2).set_z_index(2)
+        self.play(ReplacementTransform(VGroup(blackBox1,blackBox2), blackBox4), ReplacementTransform(VGroup(adp2,p2), atp2))
+        self.play(VGroup(blackBox4,atp2).animate.shift(DOWN*4 + RIGHT*2))
+
+        self.play(Write(adp3))
+        self.play(Write(p3))
+
+        blackBox1 = SurroundingRectangle(adp3, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(adp3).set_z_index(2)
+        blackBox2 = SurroundingRectangle(p3, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(p3).set_z_index(2)
+        self.play(VGroup(blackBox1, adp3).animate.shift(RIGHT*4.7 + DOWN*0.3))
+        self.play(VGroup(blackBox2, p3).animate.shift(RIGHT*4.7 + UP*0.5))
+
+
+        blackBox3 = SurroundingRectangle(h6, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(h6).set_z_index(2)
+        self.play(VGroup(blackBox3,h6).animate.shift(DOWN*1.5))
+        self.play(shaft1.animate.apply_matrix(shearInFull), shaft2.animate.apply_matrix(shearOut), VGroup(blackBox3,h6).animate.shift(RIGHT*2.2))
+        self.play(VGroup(blackBox3,h6).animate.shift(DOWN*1.5))
+        self.play(VGroup(blackBox3,h6).animate.shift(RIGHT*7))
+        self.play(VGroup(h7,h8).animate.shift(LEFT))
+
+        blackBox3 = SurroundingRectangle(h7, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(h7).set_z_index(2)
+        self.play(VGroup(blackBox3,h7).animate.shift(DOWN*1.5))
+        self.play(shaft1.animate.apply_matrix(shearOutFull), shaft2.animate.apply_matrix(shearIn), VGroup(blackBox3,h7).animate.shift(RIGHT*2.2))
+        self.play(VGroup(blackBox3,h7).animate.shift(DOWN*1.5))
+        self.play(VGroup(blackBox3,h7).animate.shift(RIGHT*7))
+        self.play(VGroup(h8).animate.shift(LEFT))
+
+        blackBox3 = SurroundingRectangle(h8, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(h8).set_z_index(2)
+        self.play(VGroup(blackBox3,h8).animate.shift(DOWN*1.5))
+        self.play(shaft1.animate.apply_matrix(shearOut), shaft2.animate.apply_matrix(shearInFull), VGroup(blackBox3,h8).animate.shift(RIGHT*2.2))
+        self.play(VGroup(blackBox3,h8).animate.shift(DOWN*1.5))
+        self.play(VGroup(blackBox3,h8).animate.shift(RIGHT*7))
+
+
+        blackBox4 = SurroundingRectangle(atp3, corner_radius=0.2, color=BLACK, fill_opacity=0.5, stroke_opacity=0).move_to(atp3).set_z_index(2)
+        self.play(ReplacementTransform(VGroup(blackBox1,blackBox2), blackBox4), ReplacementTransform(VGroup(adp3,p3), atp3))
+        self.play(VGroup(blackBox4,atp3).animate.shift(DOWN*4 + RIGHT*2))
+
+        self.play(FadeOut(complex5))

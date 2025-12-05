@@ -1,0 +1,56 @@
+2Qh2 + Q + 2H+ + 2Cytc-> 2Cytc + 2Q + QH2 + 4H+
+
+
+Qh2 + Q + Cytc-> Cytc + Q- + Q + 2H+
+
+Qh2 + Q- + Cytc + 2H+ -> Cytc QH2 + Q + 2H+
+
+
+eCyt, eQ, h+
+
+if QH2
+	+eCyt, +eQ
+
+if H+ and h+ < eQ
+	+h+
+
+if Q and eQ > 1 and h+ > 1
+	-2eQ, -2h+
+
+layer
+1 membrane
+2 complexes
+3 particles
+
+C1 Manim
+C1 Simulation
+C2 Manim
+C2 Simulation
+C3 Manim
+C3 Simulation
+C4 Manim
+C4 Simulation
+C5 Manim
+C5 Simulation
+
+Manim mit Stimmen, Hintergrund Musik
+Simulation Musik und laufen lassen im großen Stil und mit Geschwindigkeit 1x-3x
+
+
+Einordnung
+Aufbau erklären mit gradienten
+
+
+https://pmc.ncbi.nlm.nih.gov/articles/PMC6410833/
+
+
+
+
+
+
+
+
+
+
+
+
